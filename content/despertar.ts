@@ -336,7 +336,7 @@ export const programs: Program[] = [
     inquiry: {
       audience: 'La consulta la hace la organización: dirección o recursos humanos.',
       label: 'Consultar para mi organización',
-      message: 'Hola, quisiera consultar el programa Despertar al Ser para Empresas para mi organización.',
+      message: 'Hola, quisiera información sobre el programa Despertar al Ser para mi organización.',
       subject: 'Programa Despertar al Ser para Empresas',
     },
   },
