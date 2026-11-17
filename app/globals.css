@@ -1,0 +1,539 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Paleta GNOSIS, tomada del logo oficial (public/imagenes/marca/logo-gnosis.png).
+ * Usa estas clases (bg-militar, text-salvia-700, border-arena-300…) en lugar de
+ * colores hexadecimales sueltos. Contraste medido sobre `marfil`:
+ *   militar 7.1:1 · salvia-700 5.3:1 · cobre-700 5.7:1 · pizarra 6.1:1 → aptos para texto pequeño.
+ *   arena (dorado) 1.9:1 · cobre 4.1:1 · salvia 3.6:1 → solo acentos/decoración, nunca texto pequeño sobre marfil.
+ *   Sobre `bosque`: arena 5.8:1 y salvia-200 9.9:1 → aptos para texto.
+ */
+@theme {
+  /* Curva de las animaciones (igual a `ease` de components/motion/timing.ts). */
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+  /* Verde oliva oscuro del logo: botones, navegación, textos destacados. */
+  --color-militar: #47512c;
+  --color-militar-700: #3a4223;
+  /* Oliva profundo para bandas oscuras (cabeceras internas, tarjetas destacadas). */
+  --color-bosque: #2b321f;
+  --color-bosque-950: #1e2315;
+  --color-bosque-800: #3a4229;
+  /* Salvia: superficies secundarias. */
+  --color-salvia: #748057;
+  --color-salvia-700: #5a6443;
+  --color-salvia-200: #dfe0cd;
+  --color-salvia-100: #e8e7d8;
+  /* Marfil cálido: igual al papel del logo, para fundirlo con el fondo. */
+  --color-marfil: #f2eae3;
+  --color-marfil-50: #faf6f1;
+  /* Tono más claro del papel del logo: halo detrás de la imagen. */
+  --color-marfil-papel: #f6f1ec;
+  /* Dorado suave del logo (acento). */
+  --color-arena: #c9a67a;
+  --color-arena-300: #dcc49f;
+  --color-arena-100: #f2e6d3;
+  --color-arena-700: #8a6a3e;
+  /* Cobre del logo (acento). */
+  --color-cobre: #a75f33;
+  --color-cobre-700: #8a4b25;
+  --color-tinta: #262a1d;
+  --color-pizarra: #55594a;
+
+  /*
+   * Paleta de Cafetería Genoveva: solo dentro de su página (/proyectos/cafeteria-genoveva)
+   * y sus componentes de marca. El resto del sitio conserva la identidad GNOSIS.
+   * Contraste sobre `crema`: cafe 11.1:1 · cafe-700 7.5:1 · madera-700 5.1:1 · militar 7.3:1 → texto.
+   *   madera 2.1:1 → solo acentos. Sobre `cafe`: crema 11.1:1 · madera-200 9.3:1 · madera 5.4:1.
+   */
+  --color-crema: #f6eedf;
+  --color-crema-50: #fbf7f0;
+  /* Madera clara del fondo del logo. */
+  --color-madera: #e1985e;
+  --color-madera-200: #efd9bd;
+  --color-madera-700: #8a5a2e;
+  /* Café oscuro de la tipografía del logo: títulos y bandas oscuras. */
+  --color-cafe: #4b2a19;
+  --color-cafe-700: #6e4027;
+  --color-cafe-950: #2f1a0f;
+}
+
+@theme inline {
+  --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-cormorant), Georgia, 'Times New Roman', serif;
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-foreground: var(--foreground);
+  --color-background: var(--background);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+/* Tokens de shadcn/ui asignados a la paleta. El sitio usa solo tema claro. */
+:root {
+  color-scheme: light;
+  --background: var(--color-marfil);
+  --foreground: var(--color-tinta);
+  --card: var(--color-marfil-50);
+  --card-foreground: var(--color-tinta);
+  --popover: var(--color-marfil-50);
+  --popover-foreground: var(--color-tinta);
+  --primary: var(--color-militar);
+  --primary-foreground: var(--color-marfil);
+  --secondary: var(--color-salvia-200);
+  --secondary-foreground: var(--color-militar-700);
+  --muted: var(--color-salvia-100);
+  --muted-foreground: var(--color-pizarra);
+  --accent: var(--color-salvia-200);
+  --accent-foreground: var(--color-militar-700);
+  --destructive: #a63d2f;
+  --border: #ddd5c6;
+  --input: #cfc6b4;
+  --ring: var(--color-militar);
+  --radius: 0.75rem;
+}
+
+/* Contenedor estándar: ancho máximo y márgenes laterales (16px en celulares). */
+@utility container-site {
+  margin-inline: auto;
+  width: 100%;
+  max-width: 80rem;
+  padding-inline: 1rem;
+  @media (width >= 40rem) {
+    padding-inline: 1.5rem;
+  }
+  @media (width >= 64rem) {
+    padding-inline: 2rem;
+  }
+}
+
+/*
+ * Funde los bordes de papel del logo con el fondo marfil. Es una máscara de
+ * opacidad: no cambia colores. Los porcentajes respetan el margen de papel de
+ * cada recorte para no tocar el símbolo ni el texto.
+ */
+@utility brand-feather {
+  --feather-x: 5%;
+  --feather-top: 5%;
+  --feather-bottom: 5%;
+  -webkit-mask-image:
+    linear-gradient(to right, transparent, #000 var(--feather-x), #000 calc(100% - var(--feather-x)), transparent),
+    linear-gradient(to bottom, transparent, #000 var(--feather-top), #000 calc(100% - var(--feather-bottom)), transparent);
+  -webkit-mask-composite: source-in;
+  mask-image:
+    linear-gradient(to right, transparent, #000 var(--feather-x), #000 calc(100% - var(--feather-x)), transparent),
+    linear-gradient(to bottom, transparent, #000 var(--feather-top), #000 calc(100% - var(--feather-bottom)), transparent);
+  mask-composite: intersect;
+}
+
+/* Antetítulo de sección. */
+@utility eyebrow {
+  font-size: 0.75rem;
+  line-height: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    scroll-padding-top: 5rem;
+  }
+  body {
+    @apply bg-background font-sans text-foreground;
+    text-rendering: optimizeLegibility;
+  }
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+  p {
+    text-wrap: pretty;
+  }
+  ::selection {
+    background: var(--color-arena-300);
+    color: var(--color-bosque-950);
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-militar);
+    outline-offset: 3px;
+  }
+}
+
+/*
+ * Animaciones. Las de entrada y scroll usan Motion (components/motion/); aquí solo quedan
+ * efectos continuos y de puntero que no necesitan JavaScript para animarse.
+ */
+
+/* Brillo que sigue al puntero (componente `Spotlight`). `--spot-color` ajusta el tono. */
+@layer components {
+  .spotlight {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    border-radius: inherit;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    background: radial-gradient(
+      22rem circle at var(--spot-x, 50%) var(--spot-y, 50%),
+      var(--spot-color, color-mix(in oklab, var(--color-arena) 16%, transparent)),
+      transparent 70%
+    );
+  }
+  .group:hover > .spotlight {
+    opacity: 1;
+  }
+}
+
+/* Deriva lenta de los halos de fondo de las cabeceras. */
+@keyframes drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(-4%, 6%, 0) scale(1.08);
+  }
+}
+@utility animate-drift {
+  animation: drift 18s ease-in-out infinite;
+}
+@utility animate-drift-slow {
+  animation: drift 26s ease-in-out infinite reverse;
+}
+
+/*
+ * Estados de interacción unificados: `lit:` aplica a la propia tarjeta y `group-lit:` a sus hijos.
+ * Se activan con el puntero (solo en dispositivos con hover) y con el foco de teclado de un enlace interno,
+ * de modo que el teclado ve lo mismo que el ratón y el táctil no depende del hover.
+ */
+@custom-variant lit {
+  @media (hover: hover) {
+    &:hover {
+      @slot;
+    }
+  }
+  &:is(:focus-visible, :has(:focus-visible)) {
+    @slot;
+  }
+}
+@custom-variant group-lit {
+  @media (hover: hover) {
+    &:is(:where(.group):hover *) {
+      @slot;
+    }
+  }
+  &:is(:where(.group):is(:focus-visible, :has(:focus-visible)) *) {
+    @slot;
+  }
+}
+
+@layer components {
+  .group:has(:focus-visible) > .spotlight {
+    opacity: 1;
+  }
+
+  /* Iconos de los botones: la flecha avanza y el icono inicial se inclina al interactuar. */
+  [data-slot='button'] svg {
+    transition: translate 0.3s var(--ease-out-soft), rotate 0.3s var(--ease-out-soft);
+  }
+  @media (hover: hover) {
+    [data-slot='button']:hover svg[data-icon='inline-end'] {
+      translate: 3px 0;
+    }
+    [data-slot='button']:hover svg[data-icon='inline-start'] {
+      rotate: -8deg;
+    }
+  }
+  [data-slot='button']:focus-visible svg[data-icon='inline-end'] {
+    translate: 3px 0;
+  }
+  [data-slot='button']:focus-visible svg[data-icon='inline-start'] {
+    rotate: -8deg;
+  }
+
+  /* Foco visible sobre fondos oscuros (bosque, militar, café). */
+  .on-dark :focus-visible {
+    outline-color: var(--color-arena);
+  }
+}
+
+/*
+ * Entrada de las cabeceras en CSS: no espera a JavaScript, parte de un texto ya legible
+ * (opacidad 0,35) y termina en menos de 0,8 s.
+ */
+@keyframes rise-in {
+  from {
+    opacity: 0.35;
+    transform: translate3d(0, 0.6em, 0);
+  }
+}
+@utility animate-rise {
+  animation: rise-in 0.5s var(--ease-out-soft) both;
+  animation-delay: var(--d, 0ms);
+}
+
+/* Fondo de la portada: líneas que fluyen y nodos que respiran. */
+@keyframes sway {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+  50% {
+    transform: translate3d(-1.5%, 1%, 0) rotate(-1.2deg);
+  }
+}
+@keyframes breathe {
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(1.35);
+  }
+}
+@utility animate-sway {
+  animation: sway 22s ease-in-out infinite;
+}
+@utility animate-sway-slow {
+  animation: sway 34s ease-in-out infinite reverse;
+}
+@utility animate-breathe {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: breathe 6s ease-in-out infinite;
+  animation-delay: var(--d, 0ms);
+}
+
+/*
+ * Capa con profundidad: se desplaza según el puntero (--px/--py entre -0,5 y 0,5, fijadas por
+ * `HomeBackdrop` en la sección) multiplicado por su `--depth`. Usa `translate` para no chocar con
+ * las animaciones de `transform`.
+ */
+.depth-layer {
+  translate: calc(var(--px, 0) * var(--depth, 0px)) calc(var(--py, 0) * var(--depth, 0px));
+  transition: translate 1.2s var(--ease-out-soft);
+}
+
+/*
+ * Armado del logo de portada (`BrandLogo assemble`). El logo oficial solo existe en imagen, así que
+ * no hay piezas reales: cada capa es una copia del mismo archivo, recortada con una máscara de bordes
+ * suaves. Como todas son el mismo píxel en la misma posición, al encajar forman exactamente el original.
+ * Sin animación (movimiento reducido, ya visto en la sesión, CSS bloqueado), el estado por defecto es
+ * el final: copias ocultas y el logo oficial (`.logo-final`) completo.
+ * Tiempos: piezas 0–1,3 s · cierre del símbolo 0,9 s · brillo 1,15–2,15 s · nombre 1,4–2,3 s · logo final 2,25–2,6 s.
+ */
+.logo-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  pointer-events: none;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+}
+/* Piezas del símbolo: llegan desde direcciones distintas y encajan en su sitio. */
+@keyframes logo-piece {
+  0% {
+    opacity: 0;
+    translate: var(--from);
+    animation-timing-function: var(--ease-out-soft);
+  }
+  40% {
+    opacity: 1;
+    translate: 0 0;
+  }
+  92% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+/* La segunda máscara corta antes del nombre (empieza al 63 % de la altura). */
+.logo-piece {
+  -webkit-mask-image: radial-gradient(var(--r) at var(--at), #000 55%, transparent), linear-gradient(to bottom, #000 57%, transparent 62%);
+  mask-image: radial-gradient(var(--r) at var(--at), #000 55%, transparent), linear-gradient(to bottom, #000 57%, transparent 62%);
+  -webkit-mask-composite: source-in;
+  mask-composite: intersect;
+  animation: logo-piece 2.3s both;
+  animation-delay: var(--d, 0ms);
+}
+/*
+ * Cierre: el símbolo entero se completa y cubre las uniones entre piezas. Bordes muy difusos para
+ * que el papel del logo no dibuje un rectángulo sobre el fondo.
+ */
+@keyframes logo-hold {
+  0% {
+    opacity: 0;
+  }
+  28% {
+    opacity: 1;
+  }
+  /* Se mantiene hasta que el logo final es opaco (2,6 s). */
+  92% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+.logo-symbol {
+  -webkit-mask-image: radial-gradient(62% 52% at 51% 32%, #000 62%, transparent), linear-gradient(to bottom, #000 57%, transparent 62.5%);
+  mask-image: radial-gradient(62% 52% at 51% 32%, #000 62%, transparent), linear-gradient(to bottom, #000 57%, transparent 62.5%);
+  -webkit-mask-composite: source-in;
+  mask-composite: intersect;
+  animation: logo-hold 1.85s 0.9s ease-in-out both;
+}
+/* Brillo: una franja más luminosa del propio logo cruza el símbolo una sola vez. */
+@keyframes logo-sheen {
+  0% {
+    opacity: 0;
+    -webkit-mask-position: 100% 0, 0 0;
+    mask-position: 100% 0, 0 0;
+  }
+  20%,
+  70% {
+    opacity: 0.75;
+  }
+  100% {
+    opacity: 0;
+    -webkit-mask-position: 0 0, 0 0;
+    mask-position: 0 0, 0 0;
+  }
+}
+.logo-sheen {
+  filter: brightness(1.22) saturate(1.12);
+  -webkit-mask-image: linear-gradient(110deg, transparent 38%, #000 50%, transparent 62%), linear-gradient(to bottom, #000 58%, transparent 62%);
+  mask-image: linear-gradient(110deg, transparent 38%, #000 50%, transparent 62%), linear-gradient(to bottom, #000 58%, transparent 62%);
+  -webkit-mask-size: 300% 100%, 100% 100%;
+  mask-size: 300% 100%, 100% 100%;
+  -webkit-mask-composite: source-in;
+  mask-composite: intersect;
+  animation: logo-sheen 1s 1.15s ease-in-out both;
+}
+/*
+ * Nombre: se descubre de izquierda a derecha con un borde difuso. Su zona puede solaparse con la
+ * base del símbolo sin efecto visible (son los mismos píxeles), así que el borde superior es amplio.
+ */
+@keyframes logo-name {
+  0% {
+    opacity: 0;
+    translate: 0 1.5%;
+    -webkit-mask-position: 100% 0, 0 0;
+    mask-position: 100% 0, 0 0;
+    animation-timing-function: var(--ease-out-soft);
+  }
+  12% {
+    opacity: 1;
+  }
+  70% {
+    translate: 0 0;
+    -webkit-mask-position: 0 0, 0 0;
+    mask-position: 0 0, 0 0;
+  }
+  92% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    -webkit-mask-position: 0 0, 0 0;
+    mask-position: 0 0, 0 0;
+  }
+}
+.logo-name {
+  -webkit-mask-image: linear-gradient(to right, #000 40%, transparent 60%), radial-gradient(72% 36% at 50% 80%, #000 70%, transparent);
+  mask-image: linear-gradient(to right, #000 40%, transparent 60%), radial-gradient(72% 36% at 50% 80%, #000 70%, transparent);
+  -webkit-mask-size: 250% 100%, 100% 100%;
+  mask-size: 250% 100%, 100% 100%;
+  -webkit-mask-composite: source-in;
+  mask-composite: intersect;
+  animation: logo-name 1.3s 1.4s both;
+}
+/* El logo oficial (con su nombre accesible) aparece cuando las capas ya lo han formado. */
+@keyframes logo-final {
+  from {
+    opacity: 0;
+  }
+}
+.logo-build .logo-final {
+  animation: logo-final 0.35s 2.25s ease-out both;
+}
+html[data-logo-seen] .logo-build *,
+html.motion-off .logo-build * {
+  animation: none !important;
+}
+
+/* Transición breve entre páginas: solo tras navegar dentro del sitio (no en la primera carga). */
+@keyframes page-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 10px, 0);
+  }
+}
+html[data-navigated] #contenido {
+  animation: page-in 0.4s var(--ease-out-soft) both;
+}
+
+/* Respaldo: si las animaciones no arrancan (JavaScript bloqueado o con error), el contenido se muestra. */
+html.motion-off [data-reveal] {
+  opacity: 1 !important;
+  transform: none !important;
+  filter: none !important;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    animation-delay: 0s !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  /* Logo de portada: completo desde el inicio, sin armado. */
+  .logo-build * {
+    animation: none !important;
+  }
+  /* Texto que se ilumina con el scroll: completo desde el inicio. */
+  [data-scroll-word] {
+    opacity: 1 !important;
+  }
+}

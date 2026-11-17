@@ -1,0 +1,33 @@
+# Archivos que no se suben a Vercel (siguen en la carpeta local).
+
+# Dependencias, compilaciones y vínculo local de Vercel
+node_modules
+.next
+.vercel
+tsconfig.tsbuildinfo
+
+# Variables de entorno y archivos privados
+.env*
+*.pem
+*.key
+
+# Archivos de trabajo, no forman parte del sitio
+.respaldo
+CLAUDE.md
+AGENTS.md
+
+# Originales sin uso en el sitio: se publican solo los derivados optimizados.
+# Fotos del equipo a resolución completa (con metadatos de cámara)
+public/imagenes/equipo/*.JPG
+# Originales de Genoveva (el sitio usa los .webp)
+public/imagenes/proyectos/genoveva/*.png
+# Copia inicial del logo, símbolo provisional y originales del favicon
+public/imagenes/logo
+public/imagenes/marca/black.png
+public/imagenes/marca/white.png
+public/imagenes/marca/favicon/isotipo-*.png
+public/imagenes/marca/favicon/*-512.png
+# Genéricos heredados sin uso
+public/placeholder*
+public/apple-icon.png
+public/icon*

@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="GNOSIS">
+  <rect width="64" height="64" rx="14" fill="#243528"/>
+  <path d="M43.5 23.5A13 13 0 1 0 45 34H32" fill="none" stroke="#C5AD82" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="47" cy="45" r="3" fill="#A3B18A"/>
+</svg>
