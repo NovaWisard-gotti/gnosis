@@ -11,7 +11,7 @@ import { cn } from '@/lib/utils'
 export type Crumb = { label: string; href?: string }
 
 /** Cabecera de las páginas internas, con migas de pan. Entra de forma escalonada; los halos derivan lentamente. */
-export function PageHero({ intro, breadcrumbs, children }: { intro: PageIntro; breadcrumbs?: Crumb[]; children?: ReactNode }) {
+export function PageHero({ intro, lead, breadcrumbs, children }: { intro: PageIntro; lead?: string; breadcrumbs?: Crumb[]; children?: ReactNode }) {
   const crumbs: Crumb[] = [{ label: 'Inicio', href: '/' }, ...(breadcrumbs ?? [{ label: intro.eyebrow }])]
   return (
     <section className="on-dark relative overflow-hidden bg-bosque text-marfil">
@@ -31,6 +31,8 @@ export function PageHero({ intro, breadcrumbs, children }: { intro: PageIntro; b
         <h1 className="mt-4 max-w-4xl font-serif text-4xl leading-[1.08] font-semibold sm:text-5xl lg:text-6xl">
           <SplitWords text={intro.title} delay={40} />
         </h1>
+        {/* Frase que acompaña al título (p. ej. el lema de una iniciativa). */}
+        {lead && <p className="animate-rise mt-4 max-w-3xl font-serif text-2xl leading-snug font-medium text-arena sm:text-3xl" style={rise(100)}>{lead}</p>}
         <p className="animate-rise mt-6 max-w-2xl text-lg leading-8 text-salvia-200/90" style={rise(140)}>{intro.description}</p>
         {children && <div className="animate-rise" style={rise(200)}>{children}</div>}
       </div>

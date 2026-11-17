@@ -24,6 +24,18 @@ export function whatsappLink(message?: string) {
   return message ? `${whatsapp.href}?text=${encodeURIComponent(message)}` : whatsapp.href
 }
 
+/**
+ * Correo de Despertar al Ser. Solo se muestra en esa página, como alternativa a WhatsApp;
+ * no es un canal general de GNOSIS (por eso no figura en `allChannels`).
+ */
+export const programEmail = 'genoveva@gnosis.com.pe'
+
+/** Enlace de correo con asunto y mensaje iniciales. */
+export function mailtoLink(email: string, subject: string, body?: string) {
+  const params = [`subject=${encodeURIComponent(subject)}`, body ? `body=${encodeURIComponent(body)}` : ''].filter(Boolean).join('&')
+  return `mailto:${email}?${params}`
+}
+
 const allChannels: ContactChannel[] = [
   { id: 'whatsapp', label: 'WhatsApp', value: whatsapp.display, href: whatsapp.href, icon: 'MessageCircle', external: true },
   // Pendientes: completa `href` y `value` cuando estén disponibles.

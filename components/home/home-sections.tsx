@@ -13,6 +13,7 @@ import { TextLink } from '@/components/sections/common'
 import { AyniPrinciple, SharedServices, ValuesSummary } from '@/components/sections/purpose'
 import { SectionHeading } from '@/components/sections/section-heading'
 import { Button } from '@/components/ui/button'
+import { despertar, programs } from '@/content/despertar'
 import { home } from '@/content/pages'
 import { featuredProjectSlugs, getProject, projects, projectSectors } from '@/content/projects'
 import { site } from '@/content/site'
@@ -163,6 +164,51 @@ export function HomeProjects() {
         <div className="mt-10 grid gap-6 md:grid-cols-2">
           {featured.map((project, i) => <ProjectCard key={project.slug} project={project} index={i} />)}
         </div>
+      </div>
+    </section>
+  )
+}
+
+/** Despertar al Ser: presentación breve y acceso directo a cada programa. */
+export function HomeDespertar() {
+  const section = despertar.home
+  return (
+    <section className="container-site py-20 sm:py-24">
+      <div className="grid gap-10 lg:grid-cols-12 lg:items-center lg:gap-14">
+        <div className="lg:col-span-6">
+          <SectionHeading eyebrow={section.eyebrow} title={section.title} />
+          <Reveal as="p" delay={0.05} className="mt-3 font-serif text-2xl leading-snug font-medium text-cobre-700 sm:text-3xl">{section.tagline}</Reveal>
+          <Reveal as="p" delay={0.1} className="mt-5 max-w-xl text-lg leading-8 text-pizarra">{section.description}</Reveal>
+          <Reveal delay={0.15} className="mt-8">
+            <Button asChild variant="brand" size="pill" className="h-12 w-full sm:w-auto">
+              <Link href={section.link.href}>
+                {section.link.label}
+                <ArrowRight data-icon="inline-end" />
+              </Link>
+            </Button>
+          </Reveal>
+        </div>
+        <Reveal delay={0.1} className="rounded-3xl border border-salvia-200 bg-marfil-50 p-4 sm:p-6 lg:col-span-6">
+          <h3 className="eyebrow px-3 pt-2 text-salvia-700">{section.listLabel}</h3>
+          <ul className="mt-2 flex flex-col">
+            {programs.map(program => (
+              <li key={program.slug}>
+                {/* Cada fila abre su programa en la página de Despertar al Ser. */}
+                <Link href={`${section.link.href}#${program.slug}`} className="group flex items-center gap-4 rounded-xl p-3 transition-colors duration-300 active:bg-salvia-200/70 lit:bg-salvia-100">
+                  <span className="inline-flex size-11 shrink-0 items-center justify-center rounded-xl bg-militar text-marfil transition-transform duration-300 group-lit:-rotate-6 group-lit:scale-105">
+                    <Icon name={program.icon} className="size-5" />
+                  </span>
+                  <span className="min-w-0 flex-1">
+                    <span className="block font-serif text-xl font-semibold text-bosque">{program.name}</span>
+                    <span className="block text-sm text-pizarra">{program.topics}</span>
+                  </span>
+                  <span className="hidden shrink-0 text-xs font-semibold tracking-wide text-militar-700 uppercase sm:block">{program.badge}</span>
+                  <ArrowRight className="size-4 shrink-0 text-militar transition-transform duration-300 group-lit:translate-x-1" aria-hidden="true" />
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </Reveal>
       </div>
     </section>
   )

@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { HomeAbout, HomeHero, HomeImpactAndTeam, HomeProjects, HomePurpose, HomeWorkLines } from '@/components/home/home-sections'
+import { HomeAbout, HomeDespertar, HomeHero, HomeImpactAndTeam, HomeProjects, HomePurpose, HomeWorkLines } from '@/components/home/home-sections'
 import { PageFrame } from '@/components/layout/page-frame'
 import { ContactCta } from '@/components/sections/common'
 import { seo } from '@/content/seo'
@@ -18,6 +18,7 @@ export default function Page() {
       <HomeAbout />
       <HomeWorkLines />
       <HomeProjects />
+      <HomeDespertar />
       <HomeImpactAndTeam />
       <ContactCta />
     </PageFrame>

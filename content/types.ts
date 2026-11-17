@@ -27,6 +27,9 @@ export type IconName =
   | 'BadgeCheck'
   | 'Heart'
   | 'Handshake'
+  | 'Sprout'
+  | 'Compass'
+  | 'Mountain'
 
 /**
  * Imagen del sitio. `provisional: true` marca recursos de referencia que deben
@@ -142,4 +145,39 @@ export type TeamRole = {
   responsibilities?: string[]
   /** Slugs de proyectos relacionados. */
   projects?: string[]
+}
+
+/** Etapa del recorrido de un programa de Despertar al Ser (fase, estación o módulo). */
+export type ProgramStep = { name: string; when: string; text: string }
+
+/**
+ * Programa de Despertar al Ser. Datos tomados de la propuesta y del diseño completo de cada público;
+ * sin precios, porcentajes, testimonios ni resultados históricos.
+ */
+export type Program = {
+  /** También es el ancla de la página (`/despertar-al-ser#jovenes`). */
+  slug: string
+  name: string
+  /** Edad o público, como etiqueta breve. */
+  badge: string
+  icon: IconName
+  /** Frase propia del programa. */
+  lead: string
+  forWhom: string
+  topics: string
+  duration: string
+  /** Aclaración de la duración (p. ej. cómo se reparte o si es ampliable). */
+  durationNote?: string
+  format: string
+  /** Hacia dónde apunta el programa: distingue a programas que comparten etapas. */
+  goal: string
+  journey: { title: string; steps: ProgramStep[]; note?: string }
+  rhythm: string[]
+  /** Seguimiento previsto en el diseño del programa. */
+  tracking: string[]
+  /** Ejemplo breve de seguimiento para el bloque «Cómo se mide el avance». */
+  progressExample: string
+  care: string[]
+  /** Contacto: a quién va dirigida la consulta, texto del botón y mensaje precargado de WhatsApp. */
+  inquiry: { audience?: string; label: string; message: string; subject: string }
 }
