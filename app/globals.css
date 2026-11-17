@@ -537,3 +537,26 @@ html.motion-off [data-reveal] {
     opacity: 1 !important;
   }
 }
+
+/*
+ * Despliegue de los programas de Despertar al Ser (`<details class="program-details">`).
+ * Se abre con una transición de altura donde el navegador la admite; en el resto, al instante.
+ */
+.program-details {
+  interpolate-size: allow-keywords;
+}
+.program-details::details-content {
+  block-size: 0;
+  overflow-y: clip;
+  transition:
+    block-size 0.45s var(--ease-out-soft),
+    content-visibility 0.45s allow-discrete;
+}
+.program-details[open]::details-content {
+  block-size: auto;
+}
+@media (prefers-reduced-motion: reduce) {
+  .program-details::details-content {
+    transition: none;
+  }
+}

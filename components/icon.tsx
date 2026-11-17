@@ -7,6 +7,7 @@ import {
   ClipboardList,
   Code,
   Coffee,
+  Compass,
   Egg,
   Feather,
   Globe,
@@ -20,7 +21,9 @@ import {
   Lightbulb,
   Mail,
   MessageCircle,
+  Mountain,
   ShieldCheck,
+  Sprout,
   UserRound,
   UtensilsCrossed,
   Zap,
@@ -29,8 +32,8 @@ import {
 import type { IconName } from '@/content/types'
 
 const icons: Record<IconName, typeof Zap> = {
-  AtSign, BadgeCheck, Briefcase, Building2, Calculator, ClipboardList, Code, Coffee, Egg, Feather, Globe, GraduationCap,
-  HandHeart, Handshake, Heart, HeartPulse, IdCard, Laptop, Lightbulb, Mail, MessageCircle, ShieldCheck, UserRound,
+  AtSign, BadgeCheck, Briefcase, Building2, Calculator, ClipboardList, Code, Coffee, Compass, Egg, Feather, Globe, GraduationCap,
+  HandHeart, Handshake, Heart, HeartPulse, IdCard, Laptop, Lightbulb, Mail, MessageCircle, Mountain, ShieldCheck, Sprout, UserRound,
   UtensilsCrossed, Zap,
 }
 

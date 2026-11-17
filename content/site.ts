@@ -20,6 +20,7 @@ export const site = {
     { label: 'Nosotros', href: '/nosotros' },
     { label: 'Líneas de trabajo', href: '/lineas-de-trabajo' },
     { label: 'Nuestras empresas', href: '/proyectos' },
+    { label: 'Despertar al Ser', href: '/despertar-al-ser' },
     { label: 'Equipo', href: '/equipo' },
     { label: 'Impacto', href: '/impacto-social' },
     { label: 'Contacto', href: '/contacto' },

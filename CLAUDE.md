@@ -22,6 +22,7 @@ Redacción: no usar «en inicio de actividades», «empresa que recién comienza
   - `projects.ts`: empresas reales (en la web, «Nuestras empresas»; la ruta `/proyectos` se conserva por los enlaces publicados); cada objeto genera `/proyectos/[slug]`. `sector` es su división. `status` (etapa) no se muestra en tarjetas, solo como dato «Etapa» en su página; no lo cambies a «En operación» sin evidencia. `featuredProjectSlugs` define los del inicio. Opcionales: `image` (con `position` y `label`), `goals`, `inquiry` (botón «Consultar sobre el proyecto» con mensaje de WhatsApp), `references` (galería de fotos de terceros usadas como modelo; nunca como `image`) y `brand` (paleta propia, logo y galería; hoy solo Cafetería Genoveva).
   - `team.ts`: cargos con descripción, `image` (derivado `.webp` 4:5; sin ella, avatar neutro) y `name` solo cuando esté confirmado. Lo usan `/equipo` y el resumen del inicio.
   - `pages.ts`: cabeceras de cada página, textos del inicio, `sections` (títulos internos de Nosotros, Líneas de trabajo, Impacto y Contacto), `catalog` (filtro por división, contador y enlace de tarjetas) y `projectPage` (apartados de la página de cada empresa).
+  - `despertar.ts`: **Despertar al Ser** (página `/despertar-al-ser` y su presentación en el inicio): iniciativa de formación y acompañamiento de GNOSIS, facilitada por Manuel, coach ontológico. Cinco programas (`programs`: para quién, qué se trabaja, duración, modalidad, recorrido, ritmo, seguimiento previsto, cuidados y mensaje de WhatsApp), método y seguimiento. Fuente: 14 PDF entregados (infografía, propuestas y programas completos); no se publican: el programa completo se pide por WhatsApp o por correo (`programEmail` en `contact.ts`, solo para esta página). Sin precios, porcentajes, testimonios ni garantías; conservar la aclaración de que el coaching ontológico no es terapia.
   - `media.ts`: marca (`brand`: logo, isotipo, favicons) y fotografías reales (`photos`, hoy vacío).
   - `types.ts`: tipos compartidos.
 - **No inventar** información, nombres, fotografías, porcentajes, cifras ni resultados. Lo previsto se etiqueta como tal (`ProvisionalTag` «Previsto», `Fact.note`, `statusNote`, notas de cronograma). Nada de «próximamente», iconos vacíos ni enlaces ficticios.
@@ -31,7 +32,7 @@ Redacción: no usar «en inicio de actividades», «empresa que recién comienza
 
 ## Páginas
 
-El inicio (`app/page.tsx`) solo muestra **resúmenes** con enlace a cada página (los valores, solo como síntesis de nombres + el ayni breve; las descripciones van en `/nosotros#filosofia`). El contenido completo permanece en su página: `/nosotros`, `/lineas-de-trabajo`, `/proyectos`, `/proyectos/[slug]`, `/equipo`, `/impacto-social`, `/contacto`. Si añades una página, agrégala a `site.nav`.
+El inicio (`app/page.tsx`) solo muestra **resúmenes** con enlace a cada página (los valores, solo como síntesis de nombres + el ayni breve; las descripciones van en `/nosotros#filosofia`). El contenido completo permanece en su página: `/nosotros`, `/lineas-de-trabajo`, `/proyectos`, `/proyectos/[slug]`, `/despertar-al-ser`, `/equipo`, `/impacto-social`, `/contacto`. Si añades una página, agrégala a `site.nav`.
 
 ## Componentes
 
@@ -39,6 +40,7 @@ El inicio (`app/page.tsx`) solo muestra **resúmenes** con enlace a cada página
 - `components/sections/`: `PageHero` (cabecera interna con migas de pan), `SectionHeading`, `common.tsx` (`TextLink`, `ProvisionalTag`, `Notice`, `ContactCta`), `purpose.tsx` (`SharedServices`, `ValuesSummary`, `ValuesList`, `AyniPrinciple`, `IdentityPrinciple`, `FactList`).
 - `components/home/home-sections.tsx`: secciones del inicio.
 - `components/projects/`: `ProjectCard`, `ProjectVisual`, `ProjectsExplorer` (cliente, filtro por división). Para proyectos con `brand`: `project-brand.tsx` (`BrandHero`, `BrandIdentity`), `project-gallery.tsx` (cliente: galería y ampliación con `Dialog` de Base UI; `tone` `gnosis` o `genoveva`; con ≤3 imágenes, anchos proporcionales a su formato) y `project-theme.ts` (clases por paleta).
+- `components/despertar/`: `ProgramList` y `ProgramJump` (cliente: programas comparables con detalle en `<details class="program-details">`; `#slug` abre el programa), `ProgramContact` (cliente: recuerda el programa elegido y precarga WhatsApp y correo), `ProgramSelectionProvider` y `despertar-sections.tsx` (método y seguimiento).
 - `components/team/team-card.tsx`: `TeamCard` y `TeamPortrait` (foto 4:5 o avatar neutro con el icono del cargo).
 - `components/contact/whatsapp-button.tsx`: botón «Escríbenos por WhatsApp» (datos de `content/contact.ts`). En el encabezado aparece desde `xl`; por debajo, en el menú móvil.
 - `components/brand/logo.tsx`: **único punto para mostrar la marca**. `BrandCompact` (isotipo + nombre, encabezado) y `BrandLogo` (logo completo: portada y pie). No insertes el logo con `<img>` sueltos.

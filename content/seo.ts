@@ -39,6 +39,10 @@ export const seo = {
       title: 'Nuestras empresas en Ayacucho',
       description: `Empresas de GNOSIS Desarrollo Integral en Ayacucho: ${listOf(projects.map(project => project.name))}. Identidad, propuesta y etapa de cada una.`,
     },
+    despertar: {
+      title: 'Despertar al Ser: programas de acompañamiento',
+      description: 'Despertar al Ser, de GNOSIS en Ayacucho: cinco programas de coaching ontológico para adolescentes, jóvenes, adultos, ejecutivos y empresas.',
+    },
     equipo: {
       title: 'Equipo',
       description: 'Roles que sostienen las empresas de GNOSIS Desarrollo Integral: dirección, administración, contabilidad y soporte tecnológico compartidos desde Ayacucho.',
